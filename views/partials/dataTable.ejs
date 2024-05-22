@@ -1,0 +1,26 @@
+<% if(typeof dbData != 'undefined'){%>
+    <form id="dataForm" action="/" method="POST">
+        <table id="dataTable">
+            <% if(dbData[0]){Object.keys(dbData[0]).forEach( header => {%>
+                <th> <%= header; %> </th>
+            <% })}; %>
+            <% dbData.forEach( row => {%>
+            <tr>
+                <% Object.values(row).forEach( value => {%>
+            <td> 
+                <%= value; %>    
+            </td>
+                <% }); %>
+                        <% if(Object.values(row).length>0){ %>
+                <td>
+                    <button type="submit" id="delRowBtn" name="delRowBtn" value="<%= tableName; %>,<%= row.id; %>">del</button>
+                </td>   
+                        <% }; %> 
+            </tr>
+            <% }); %>
+            <% if(dbData[0]){Object.keys(dbData[0]).forEach( header => {%>
+                <input type="text" placeholder="<%= header; %>" required>
+            <% })}; %>
+        </table>
+    </form>
+<% } %>

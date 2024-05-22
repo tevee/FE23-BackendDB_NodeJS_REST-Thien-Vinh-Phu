@@ -1,0 +1,21 @@
+<aside id="asideTable">
+    <form id="asideForm" action="/" method="POST">
+    <% if(typeof dbTables != 'undefined'){%>
+        <table>
+            <% if(dbTables[0]){Object.keys(dbTables[0]).forEach( header => {%>
+                <th> <%= header; %> </th>
+            <% })}; %>
+        <% dbTables.forEach( row => {%>
+            <tr>
+            <% Object.values(row).forEach( value => {%>
+            <td> 
+                <button type="submit" class="tablesAsideBtn" name = tableAsideBtn value = '<%= value; %>';"><%= value; %></button>
+            </td>
+            <% }); %>
+            </tr>
+        <% }); %>
+        
+        </table>
+        <% } %>
+    </form>
+</aside>

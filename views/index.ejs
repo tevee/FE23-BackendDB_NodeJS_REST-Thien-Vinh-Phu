@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+
+<body>
+    <%- include('partials/header') %>
+
+    <main>
+        <h2> <%= pageTitle; %></h2>
+        <p> <%= tableName; %></p>
+    
+        <%- include('partials/tablesAside') %>
+    
+        <%- include('partials/dataTable') %>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
