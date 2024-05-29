@@ -1,9 +1,11 @@
 <% if(typeof dbData != 'undefined'){%>
-    <form id="dataForm" action="/" method="POST">
-        <table id="dataTable">
+    <form id="dataForm" action="<%= endpoint; %>" method="POST">
+        <table id="dataTable" class="styled-table">
+            <thead>
             <% if(dbData[0]){Object.keys(dbData[0]).forEach( header => {%>
-                <th> <%= header; %> </th>
-            <% })}; %>
+                    <th> <%= header; %> </th>
+                <% })}; %>
+            </thead>
             <% dbData.forEach( row => {%>
             <tr>
                 <% Object.values(row).forEach( value => {%>
@@ -18,9 +20,6 @@
                         <% }; %> 
             </tr>
             <% }); %>
-            <% if(dbData[0]){Object.keys(dbData[0]).forEach( header => {%>
-                <input type="text" placeholder="<%= header; %>" required>
-            <% })}; %>
         </table>
     </form>
 <% } %>

@@ -1,6 +1,7 @@
 import express from "express";
 import ejs from "ejs";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import { apiRouter } from "./modules/apiRouter.js";
 import { viewRouter } from "./modules/viewRouter.js";
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(cors());
 
 app.use("/api", apiRouter);

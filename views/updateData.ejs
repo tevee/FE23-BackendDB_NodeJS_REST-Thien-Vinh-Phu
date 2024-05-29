@@ -1,0 +1,25 @@
+<%- include('partials/head') %>
+
+<body>
+    <%- include('partials/header') %>
+
+    <main>
+        <h2 class="view-path"> <%= pageTitle; %></h2>
+        <p>Active table: <%= tableName; %></p>
+
+        <form class="form" action="/updateData" method="POST">
+            <% if(dbData[0]){Object.keys(dbData[0]).slice(1).forEach( header => {%>
+                <%= header %> (Optional) <input type="text" name="<%= header; %>" placeholder="<%= header; %>">
+            <% })}; %>
+                Row id to be updated: <input type="number" name="id" placeholder="id" required>
+            <div class="form-btn-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    
+        <%- include('partials/dataTable') %>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
