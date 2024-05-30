@@ -98,23 +98,27 @@ function checkRequiredFields(requestQuery, requiredFields) {
 // Create data for selected table
 export function createData(tableName, requiredFields) {
     return async (req, res) => {
-        const requestQuery = req.query;
+        const requestBody = req.body
+        console.log('req body', requestBody);
 
-        if(!checkRequiredFields(requestQuery, requiredFields)) {
+        if(!checkRequiredFields(requestBody, requiredFields)) {
             return res.status(400).json({ error: `${requiredFields.join(", ")} are required fields` });
         }
 
-        const keys = Object.keys(requestQuery).join(', ');
-        const values = Object.values(requestQuery).map((value) => {
+        const keys = Object.keys(requestBody).join(', ');
+        const values = Object.values(requestBody).map((value) => {
             if(typeof value === 'string') return `'${value.replace(/'/g, "''")}'`;
             else return value;
         }).join(', ');
+        console.log('keys', keys);
+        console.log('values', values);
 
         const sqlCreateQuery = `
             INSERT INTO ${tableName}
             (${keys})
             VALUES (${values});
         `;
+        console.log(sqlCreateQuery);
         
         try {
             const dbData = await db.query(sqlCreateQuery);
@@ -129,8 +133,9 @@ export function createData(tableName, requiredFields) {
 
 export function deleteData(tableName) {
     return async (req, res) => {
-        
-        const {id} = req.query;
+        console.log(req.body);
+        const {id} = req.body;
+        console.log(id);
 
         if(!id || isNaN(Number(id))) {
             return res.status(400).json({ error: 'Invalid or missing ID parameter' });
